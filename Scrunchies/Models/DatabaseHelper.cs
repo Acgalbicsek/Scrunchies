@@ -23,7 +23,7 @@ namespace Scrunchies.Models
                 using (MySqlCommand cmd = new MySqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@Name", product.Name);
-                    cmd.Parameters.AddWithValue("@Quantity", product.Quantity);
+                    cmd.Parameters.AddWithValue("@Quantity", product.StockQuantity);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -47,7 +47,7 @@ namespace Scrunchies.Models
                             {
                                 IDProduct = reader.GetInt32("IDProduct"),
                                 Name = reader.GetString("Name"),
-                                Quantity = reader.GetInt32("Quantity"),
+                              
                                 StockQuantity = reader.GetInt32("StockQuantity")
                             });
                         }
@@ -84,7 +84,39 @@ namespace Scrunchies.Models
             return new List<Sales>();
         }
 
-        
+
+        public static List<ProductSalesSummary> GetSalesByProduct()
+        {
+            var summaryList = new List<ProductSalesSummary>();
+
+            using (var conn = new MySqlConnection(connectionString))
+            {
+                conn.Open();
+                string query = @"
+            SELECT p.Name AS ProductName, SUM(s.QuantitySold) AS TotalQuantity
+            FROM Sales s
+            JOIN Product p ON s.ProductID = p.ProductID
+            GROUP BY p.Name
+            ORDER BY TotalQuantity DESC;
+        ";
+
+                using (var cmd = new MySqlCommand(query, conn))
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        summaryList.Add(new ProductSalesSummary
+                        {
+                            ProductName = reader.GetString("ProductName"),
+                            TotalQuantitySold = reader.GetInt32("TotalQuantity")
+                        });
+                    }
+                }
+            }
+
+            return summaryList;
+        }
+
 
     }
 

@@ -47,3 +47,4 @@ C:\Users\acgal\Desktop\repos\Scrunchies\Scrunchies\bin\Debug\net8.0-windows\Micr
 C:\Users\acgal\Desktop\repos\Scrunchies\Scrunchies\bin\Debug\net8.0-windows\Microsoft.Extensions.FileSystemGlobbing.dll
 C:\Users\acgal\Desktop\repos\Scrunchies\Scrunchies\bin\Debug\net8.0-windows\Microsoft.Extensions.Primitives.dll
 C:\Users\acgal\Desktop\repos\Scrunchies\Scrunchies\bin\Debug\net8.0-windows\appsettings.json
+C:\Users\acgal\Desktop\repos\Scrunchies\Scrunchies\obj\Debug\net8.0-windows\Scrunchies.sourcelink.json
