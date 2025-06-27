@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Scrunchies.Models
 {
     public class DatabaseHelper
@@ -17,13 +18,13 @@ namespace Scrunchies.Models
             using (var conn = new MySqlConnection(connectionString))
             {
                 conn.Open();
-                string query = @"INSERT INTO Product (Name, Quantity) 
-                         VALUES (@Name, @Quantity)";
+                string query = @"INSERT INTO Product (Name, StockQuantity) 
+                         VALUES (@Name, @StockQuantity)";
 
                 using (MySqlCommand cmd = new MySqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@Name", product.Name);
-                    cmd.Parameters.AddWithValue("@Quantity", product.StockQuantity);
+                    cmd.Parameters.AddWithValue("@StockQuantity", product.StockQuantity);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -82,40 +83,53 @@ namespace Scrunchies.Models
         {
             
             return new List<Sales>();
+
         }
 
-
-        public static List<ProductSalesSummary> GetSalesByProduct()
+        public static async Task<int> GetStockQuantityAsync(Scrunchies context, int productId)
         {
-            var summaryList = new List<ProductSalesSummary>();
-
-            using (var conn = new MySqlConnection(connectionString))
-            {
-                conn.Open();
-                string query = @"
-            SELECT p.Name AS ProductName, SUM(s.QuantitySold) AS TotalQuantity
-            FROM Sales s
-            JOIN Product p ON s.ProductID = p.ProductID
-            GROUP BY p.Name
-            ORDER BY TotalQuantity DESC;
-        ";
-
-                using (var cmd = new MySqlCommand(query, conn))
-                using (var reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        summaryList.Add(new ProductSalesSummary
-                        {
-                            ProductName = reader.GetString("ProductName"),
-                            TotalQuantitySold = reader.GetInt32("TotalQuantity")
-                        });
-                    }
-                }
-            }
-
-            return summaryList;
+            return await context.ProductStock
+                .Where(ps => ps.ProductID == productId)
+                .Select(ps => ps.StockQuantity)
+                .FirstOrDefaultAsync();
         }
+
+
+
+
+
+
+        //public static List<ProductSalesSummary> GetSalesByProduct()
+        //{
+        //    var summaryList = new List<ProductSalesSummary>();
+
+        //    using (var conn = new MySqlConnection(connectionString))
+        //    {
+        //        conn.Open();
+        //        string query = @"
+        //    SELECT p.Name AS ProductName, SUM(s.QuantitySold) AS TotalQuantity
+        //    FROM Sales s
+        //    JOIN Product p ON s.ProductID = p.ProductID
+        //    GROUP BY p.Name
+        //    ORDER BY TotalQuantity DESC;
+        //";
+
+        //        using (var cmd = new MySqlCommand(query, conn))
+        //        using (var reader = cmd.ExecuteReader())
+        //        {
+        //            while (reader.Read())
+        //            {
+        //                summaryList.Add(new ProductSalesSummary
+        //                {
+        //                    ProductName = reader.GetString("ProductName"),
+        //                    TotalQuantitySold = reader.GetInt32("TotalQuantity")
+        //                });
+        //            }
+        //        }
+        //    }
+
+        //    return summaryList;
+        //}
 
 
     }

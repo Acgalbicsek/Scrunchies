@@ -61,7 +61,7 @@ namespace Scrunchies
             Product blueberryScrunchie = new Product
             {
                 Name = "Blueberry",
-                StockQuantity = 4
+                StockQuantity = 9
             };
             DatabaseHelper.AddProduct(blueberryScrunchie);
 
@@ -82,14 +82,14 @@ namespace Scrunchies
             Product blackPokemonScrunchie = new Product
             {
                 Name = "Black Pokemon",
-                 StockQuantity = 6
+                 StockQuantity = 8
             };
             DatabaseHelper.AddProduct(blackPokemonScrunchie);
 
             Product salmonScrunchie = new Product
             {
                 Name = "Salmon",
-                StockQuantity = 4
+                StockQuantity = 9
             };
 
             DatabaseHelper.AddProduct(salmonScrunchie);
@@ -97,7 +97,7 @@ namespace Scrunchies
             Product walrusScrunchie = new Product
             {
                 Name = "Walrus",
-                StockQuantity = 1
+                StockQuantity = 6
             };
 
             DatabaseHelper.AddProduct(walrusScrunchie);
@@ -137,7 +137,7 @@ namespace Scrunchies
             Product fireweedScrunchie = new Product
             {
                 Name = "Fireweed",
-                StockQuantity = 6
+                StockQuantity = 10
             };
 
             DatabaseHelper.AddProduct(fireweedScrunchie);
@@ -223,12 +223,12 @@ namespace Scrunchies
 
 
 
-            var salesSummary = DatabaseHelper.GetSalesByProduct();
+            //var salesSummary = DatabaseHelper.GetSalesByProduct();
 
-            foreach (var item in salesSummary)
-            {
-                Console.WriteLine($"Product: {item.ProductName}, Total Sold: {item.TotalQuantitySold}");
-            }
+            //foreach (var item in salesSummary)
+            //{
+            //    Console.WriteLine($"Product: {item.ProductName}, Total Sold: {item.TotalQuantitySold}");
+            //}
 
         }
 

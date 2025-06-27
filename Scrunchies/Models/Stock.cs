@@ -6,11 +6,15 @@ using System.Threading.Tasks;
 
 namespace Scrunchies.Models
 {
-    internal class ProductSalesSummary
+    internal class Stock
     {
 
-        public string ProductName {  get; set; }
+       
+        public int IDStock { get; set; }
+        public int StockQuantity { get; set; }
 
-        public int TotalQuantitySold {  get; set; }
+
+        
+
     }
 }
