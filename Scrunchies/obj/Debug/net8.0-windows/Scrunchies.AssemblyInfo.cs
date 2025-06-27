@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Scrunchies")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+789d6bfa8d3003ce10181e153def59e3a8e1cc59")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b073a64348c19fd4a26540f29270511104049e3b")]
 [assembly: System.Reflection.AssemblyProductAttribute("Scrunchies")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Scrunchies")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -8,7 +8,7 @@ namespace Scrunchies.Models
 {
     public class Sales
     {
-        public int IdNumber { get; set; }
+        public int IDSales { get; set; }
 
         public int QuantitySold { get; set; }   
 

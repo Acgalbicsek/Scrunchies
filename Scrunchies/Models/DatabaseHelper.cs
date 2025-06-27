@@ -48,7 +48,6 @@ namespace Scrunchies.Models
                             {
                                 IDProduct = reader.GetInt32("IDProduct"),
                                 Name = reader.GetString("Name"),
-                              
                                 StockQuantity = reader.GetInt32("StockQuantity")
                             });
                         }
@@ -71,7 +70,7 @@ namespace Scrunchies.Models
                          VALUES (@ProductID, @QuantitySold, @DateSold)";
                 using (var cmd = new MySqlCommand(query, conn))
                 {
-                    cmd.Parameters.AddWithValue("@ProductID", sale.IdNumber);
+                    cmd.Parameters.AddWithValue("@ProductID", sale.IDSales);
                     cmd.Parameters.AddWithValue("@QuantitySold", sale.QuantitySold);
                     cmd.Parameters.AddWithValue("@DateSold", sale.DateSold);
                     cmd.ExecuteNonQuery();
@@ -86,7 +85,7 @@ namespace Scrunchies.Models
 
         }
 
-        public static async Task<int> GetStockQuantityAsync(Scrunchies context, int productId)
+        public static async Task<int> GetStockQuantityAsync(ScrunchieContext context, int productId)
         {
             return await context.ProductStock
                 .Where(ps => ps.ProductID == productId)
